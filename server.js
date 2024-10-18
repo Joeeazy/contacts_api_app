@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 import contactRoutes from "./routes/contact.routes.js";
 import { errorHandler } from "./middleware/errors.middleware.js";
-
+import { connectDB } from "./lib/mongodb.js";
 dotenv.config();
 
 const app = express();
@@ -16,4 +16,6 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
+
+  connectDB();
 });
