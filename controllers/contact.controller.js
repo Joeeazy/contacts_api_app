@@ -6,13 +6,22 @@ export const getAllContacts = asyncHandler(async (req, res) => {
   res.json(contacts);
 });
 
-export const getcontact = asyncHandler(async (req, res) => {
+// export const getcontact = asyncHandler(async (req, res) => {
+//   const contact = await Contact.findById(req.params.id);
+
+//   if (!contact) {
+//     return res.status(404).json({ message: "Contact not found" });
+//     //throw new Error("Contant not found");
+//   }
+//   res.status(200).json(contact);
+// });
+export const getContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
 
   if (!contact) {
-    res.status(404);
-    throw new Error("Contant not found");
+    return res.status(404).json({ message: "Contact not found" });
   }
+
   res.status(200).json(contact);
 });
 
@@ -62,5 +71,13 @@ export const updateContact = asyncHandler(async (req, res) => {
 });
 
 export const deleteContact = asyncHandler(async (req, res) => {
-  res.json({ Message: `Delete Contact for ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+
+  if (!contact) {
+    return res.status(404).json({ message: "Contact not found" });
+  }
+
+  await contact.deleteOne();
+
+  res.status(200).json({ message: "Contact successfully deleted" });
 });

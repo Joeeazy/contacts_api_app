@@ -3,7 +3,7 @@ import {
   createContact,
   deleteContact,
   getAllContacts,
-  getcontact,
+  getContact,
   updateContact,
 } from "../controllers/contact.controller.js";
 
@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/", getAllContacts);
 
-router.get("/:id", getcontact);
+router.get("/:id", getContact);
 
 router.post("/", createContact);
 
